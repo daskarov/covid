@@ -9,7 +9,7 @@ import { CovidService, State } from './covid.service';
 })
 export class CovidComponent implements OnInit {
 
-    state = null;
+    state: State = null;
 
     constructor(private coronaService: CovidService) {
     }
@@ -44,5 +44,9 @@ export class CovidComponent implements OnInit {
         }
         const count = this.coronaService.getCountForState(this.state);
         return count > 0 ? count.toString() : '';
+    }
+
+    public getState() : string {
+        return this.state != null ? this.state.state : '';
     }
 }
