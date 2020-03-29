@@ -57,6 +57,9 @@ export class CovidService {
     }
 
     public getLatestDate(): string {
+        if (this.df === null) {
+            return '';
+        }
         return this.latestDate[0];
     }
 

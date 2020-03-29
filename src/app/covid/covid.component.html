@@ -1,16 +1,18 @@
-<div class="corona-container">
-    <span class="mat-typography" style="margin-right: 20px;">{{lastUpdated()}}</span>
+<div class="covid-container">
+    <div class="covid-header">
+        <span class="mat-typography covid-title-text"><strong>US Covid-19 Status</strong> (based on New York Times Github dataset</span><br>
+        <span class="mat-typography covid-title-text"><strong>Updated to:</strong> {{lastUpdated()}}</span>
+        <span class="mat-typography covid-title-text"><strong>Total number of cases:</strong> {{totalCases()}}</span>
+        <mat-form-field>
+            <mat-label>Select State</mat-label>
+            <mat-select (selectionChange)="onStateChanged()" [(value)]="state">
+                <mat-option *ngFor="let item of listStates()" [value]="item">
+                    {{item.state}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <span class="mat-typography" style="margin-right: 20px;">{{currentCasesForState()}}</span>
+    </div>
 
-    <span class="mat-typography" style="margin-right: 20px;">{{totalCases()}}</span>
 
-    <mat-form-field>
-        <mat-label>Select State</mat-label>
-        <mat-select (selectionChange)="onStateChanged()" [(value)]="state">
-            <mat-option *ngFor="let item of listStates()" [value]="item">
-                {{item.state}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <span class="mat-typography" style="margin-right: 20px;">{{currentCasesForState()}}</span>
 </div>

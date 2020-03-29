@@ -3,7 +3,7 @@ import { DataFrame } from 'dataframe-js';
 import { CovidService, State } from './covid.service';
 
 @Component({
-    selector: 'app-corona',
+    selector: 'app-covid',
     templateUrl: './covid.component.html',
     styleUrls: ['./covid.component.scss']
 })

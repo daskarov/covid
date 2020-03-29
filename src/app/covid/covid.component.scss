@@ -1,7 +1,22 @@
-.corona-container {
+.covid-container {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.covid-header {
+    background: darkblue;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.covid-title-text {
+    font-size: 18px;
+    color: white;
+    margin-right: 20px;
+    margin-left: 10px;
 }
