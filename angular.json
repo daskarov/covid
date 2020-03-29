@@ -92,8 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@swimlane/ngx-datatable/themes/material.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -124,6 +123,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ng-sample"
 }

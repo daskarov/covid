@@ -1,9 +1,9 @@
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MatCardModule } from '@angular/material';
 import { ThreeComponent } from './three/three.component';
 import { DynamicComponent } from './dynamic/dynamic.component';
+import { MatCardModule } from '@angular/material/card';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {

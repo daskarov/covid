@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { MatCardModule } from '@angular/material';
 import { ThreeComponent } from './three.component';
+import { MatCardModule } from '@angular/material/card';
 
 describe('ThreeComponent', () => {
     let component: ThreeComponent;
