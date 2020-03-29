@@ -1,1 +1,10 @@
-
+<div class="corona-container">
+    <mat-form-field>
+        <mat-label>Select State</mat-label>
+        <mat-select (selectionChange)="onStateChanged()" [(value)]="state">
+            <mat-option *ngFor="let item of listStates()" [value]="item">
+                {{item.state}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatSelectModule, MatSliderModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { DynamicComponent } from './dynamic/dynamic.component';
@@ -13,6 +12,12 @@ import { OtherComponent } from './other/other.component';
 import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import { CoronaComponent } from './corona/corona.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
     declarations: [

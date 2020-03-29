@@ -9,7 +9,7 @@ class StlElement {
     }
 
     public idFromUrl(url: string): string {
-        let m = url.match(this.re);
+        const m = url.match(this.re);
         return this.idFromData(m.groups.side, Number(m.groups.sideIndex));
     }
 
@@ -51,7 +51,8 @@ export class OtherComponent implements OnInit {
     }
 
     public nameToElectrodeModel(name: string): ElectrodeModels {
-        const index = Object.values(ElectrodeModels).indexOf(name, 0);
+        const names: Array<string> = Object.values(ElectrodeModels);
+        const index = names.indexOf(name, 0);
         if (index === -1) {
             throw new Error(`Unknown electrode model ${name}`);
         }
