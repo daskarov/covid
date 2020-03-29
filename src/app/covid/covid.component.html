@@ -1,4 +1,8 @@
 <div class="corona-container">
+    <span class="mat-typography" style="margin-right: 20px;">{{lastUpdated()}}</span>
+
+    <span class="mat-typography" style="margin-right: 20px;">{{totalCases()}}</span>
+
     <mat-form-field>
         <mat-label>Select State</mat-label>
         <mat-select (selectionChange)="onStateChanged()" [(value)]="state">
@@ -7,4 +11,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <span class="mat-typography" style="margin-right: 20px;">{{currentCasesForState()}}</span>
 </div>

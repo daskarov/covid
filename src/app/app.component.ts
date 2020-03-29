@@ -10,5 +10,6 @@ export class AppComponent {
     title = 'ng-sample';
 
     constructor(public router: Router) {
+        router.navigate(['covid']).then();
     }
 }
