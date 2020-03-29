@@ -1,0 +1,46 @@
+@import '../node_modules/@angular/material/theming';
+
+@include mat-core();
+
+// Return a theme map where the foreground and background sub-maps have been augmented with additional keys.
+@function sis-light-theme($primary, $accent, $warn) {
+  $result: mat-light-theme($primary, $accent, $warn);
+  @return map-merge($result, (
+    foreground: map-merge(map-get($result, foreground), (
+      hover-row-text: mat-color($primary, '100-contrast'),
+      hover-nav-text: mat-color($primary, '100-contrast'),
+      active-row-text: mat-color($primary, '400-contrast'),
+      active-nav-text: mat-color($primary, '400-contrast'),
+    )),
+    background: map-merge(map-get($result, background), (
+      hover-row: mat-color($primary, 100),
+      hover-nav-item: mat-color($primary, 100),
+      active-row: mat-color($primary, 400),
+      active-nav-item: mat-color($primary, 400),
+    ))
+  ))
+}
+
+// pink-bluegrey
+// $primary: mat-palette($mat-pink, 700, 500, 900);
+// $accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+// $theme: mat-dark-theme($primary, $accent);
+
+// deeppurple-amber
+// $primary: mat-palette($mat-deep-purple);
+// $accent:  mat-palette($mat-amber, A200, A100, A400);
+// $theme: sis-light-theme($primary, $accent);
+
+// indigo-pink
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+$theme: sis-light-theme($primary, $accent, $warn);
+
+// purple-green
+// $primary: mat-palette($mat-purple, 700, 500, 800);
+// $accent:  mat-palette($mat-green, A200, A100, A400);
+// $theme: mat-dark-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);

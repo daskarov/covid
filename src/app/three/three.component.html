@@ -1,0 +1,23 @@
+<div class="main-container">
+    <div #canvas class="canvas_view"></div>
+    <div class="sliders-side">
+        <span class="mat-typography">Rotation</span>
+        <mat-slider class="slider-view"
+                    min="{{-maxRotation}}"
+                    max="{{maxRotation}}"
+                    step="0.1"
+                    [(value)]="rotationValue"
+                    (input)="onRotationChange($event)">
+        </mat-slider>
+        <span  class="mat-typography" style="margin-bottom: 50px;">{{rotationValue}}</span>
+        <span class="mat-typography">Camera Height</span>
+        <mat-slider class="slider-view"
+                    min="{{minHeight}}"
+                    max="{{maxHeight}}"
+                    step="1"
+                    [(value)]="cameraValue"
+                    (input)="onCameraChange($event)">
+        </mat-slider>
+        <span class="mat-typography">{{cameraValue}}</span>
+    </div>
+</div>
