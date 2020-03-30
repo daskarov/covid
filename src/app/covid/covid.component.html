@@ -1,4 +1,4 @@
-<div class="covid-container">
+<div class="fill-parent covid-container">
     <div class="covid-header">
         <span class="mat-typography covid-title-text"><strong>US Covid-19 Status</strong> (based on New York Times Github dataset)</span><br>
         <span class="mat-typography covid-title-text"><strong>Latest update:</strong> {{lastUpdated()}}</span>
@@ -14,9 +14,11 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <span class="mat-typography"  style="margin-left: 20px;" [hidden]="state === null"><strong>Total cases in {{getState()}}:</strong> {{casesForState()}}</span>
-        <span class="mat-typography"  style="margin-left: 20px;" [hidden]="state === null"><strong>Total deaths in {{getState()}}:</strong> {{deathsForState()}}</span>
+        <span class="mat-typography" style="margin-left: 20px;"
+              [hidden]="state === null"><strong>Total cases in {{getState()}}:</strong> {{casesForState()}}</span>
+        <span class="mat-typography" style="margin-left: 20px;"
+              [hidden]="state === null"><strong>Total deaths in {{getState()}}:</strong> {{deathsForState()}}</span>
     </div>
 
-    <app-barchart *ngIf="chartData.length > 0" [data]="chartData"></app-barchart>
+    <app-barchart class="covid-chart" *ngIf="chartData.length > 0" [data]="chartData"></app-barchart>
 </div>
