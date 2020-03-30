@@ -6,7 +6,9 @@ export interface State {
 }
 
 export interface StateData {
-    state: string;
+    date: string;
+    cases: number;
+    deaths: number;
 }
 
 @Injectable({

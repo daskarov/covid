@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
+import { StateData } from '../covid.service';
 
 @Component({
     selector: 'app-barchart',
@@ -11,7 +12,7 @@ export class BarchartComponent implements OnInit, OnChanges {
 
     @ViewChild('chart', {static: true}) chartContainer: ElementRef;
 
-    @Input() private data: Array<any>;
+    @Input() private data: Array<StateData>;
 
     private margin: any = {top: 40, bottom: 40, left: 50, right: 50};
     private chart: any;
@@ -49,16 +50,15 @@ export class BarchartComponent implements OnInit, OnChanges {
         this.chart = svg.append('g').attr('class', 'bars')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
-        // define X & Y domains
-        let xDomain = this.data[0];
-        let yDomain = [0, d3.max(this.data[1], d => Number(d))];
+        let xDomain = this.data.map(d => d.date);
+        let yDomain = [0, d3.max(this.data, d => d.cases)];
 
         // create scales
         this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
         this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
 
         // bar colors
-        this.colors = d3.scaleLinear().domain([0, this.data[0].length]).range(<any[]> ['red', 'blue']);
+        this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]> ['blue', 'red']);
 
         // x & y axis
         this.xAxis = svg.append('g').attr('class', 'axis axis-x')
@@ -71,8 +71,8 @@ export class BarchartComponent implements OnInit, OnChanges {
 
     updateChart() {
         // update scales & axis
-        this.xScale.domain(this.data[0]);
-        this.yScale.domain([0, d3.max(this.data[1])]);
+        this.xScale.domain(this.data.map(d => d.date));
+        this.yScale.domain([0, d3.max(this.data, d => d.cases)]);
         this.colors.domain([0, this.data.length]);
         this.xAxis.transition().call(d3.axisBottom(this.xScale));
         this.yAxis.transition().call(d3.axisLeft(this.yScale));
@@ -84,24 +84,24 @@ export class BarchartComponent implements OnInit, OnChanges {
 
         // update existing bars
         this.chart.selectAll('.bar').transition()
-            .attr('x', this.data[0])
-            .attr('y', d => this.yScale(d => d))
+            .attr('x', d => this.xScale(d.date))
+            .attr('y', d => this.yScale(d.cases))
             .attr('width', d => this.xScale.bandwidth())
-            .attr('height', d => this.height - this.yScale(d[1]))
+            .attr('height', d => this.height - this.yScale(d.cases))
             .style('fill', (d, i) => this.colors(i));
 
         // add new bars
         update.enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('x', d => this.xScale(d => d))
-            .attr('y', d => this.yScale())
+            .attr('x', d => this.xScale(d.date))
+            .attr('y', d => this.yScale(0))
             .attr('width', this.xScale.bandwidth())
             .attr('height', 0)
             .style('fill', (d, i) => this.colors(i))
             .transition()
             .delay((d, i) => i * 10)
-            .attr('y', d => this.yScale(d[1]))
-            .attr('height', d => this.height - this.yScale(d[1]));
+            .attr('y', d => this.yScale(d.cases))
+            .attr('height', d => this.height - this.yScale(d.cases));
     }
 }

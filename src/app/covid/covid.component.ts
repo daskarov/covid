@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataFrame } from 'dataframe-js';
-import { CovidService, State } from './covid.service';
+import { CovidService, State, StateData } from './covid.service';
 
 @Component({
     selector: 'app-covid',
@@ -16,7 +16,7 @@ export class CovidComponent implements OnInit {
     public static readonly DEATHS: string = 'deaths';
 
     public state: State = null;
-    public chartData: Array<Array<string>> = new Array<Array<string>>();
+    public chartData: Array<StateData> = new Array<StateData>();
 
     @ViewChild('chart') private chartContainer: ElementRef;
 
@@ -36,10 +36,12 @@ export class CovidComponent implements OnInit {
     }
 
     private displayState(df: DataFrame) {
-        this.chartData = this.covidService.getColumns(df, [
+        const lists = this.covidService.getColumns(df, [
             CovidComponent.DATE, CovidComponent.CASES, CovidComponent.DEATHS
         ]);
-        console.log(`Count for ${this.state.state} = ${this.chartData.length}`);
+        this.chartData = lists[0].map((item, index) => (
+            {date: lists[0][index], cases: Number(lists[1][index]), deaths: Number(lists[2][index])}
+        ));
     }
 
     public lastUpdated(): string {
