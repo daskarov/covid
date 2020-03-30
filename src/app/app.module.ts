@@ -15,11 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { CovidComponent } from './covid/covid.component';
+import { BarchartComponent } from './covid/barchart/barchart.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CovidComponent,
+        BarchartComponent,
     ],
     imports: [
         BrowserModule,

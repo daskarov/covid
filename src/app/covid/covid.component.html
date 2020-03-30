@@ -8,12 +8,15 @@
     <div class="covid-state-selection">
         <mat-form-field style="margin-left: 20px;">
             <mat-label>Select State</mat-label>
-            <mat-select (selectionChange)="onStateChanged()" [(value)]="state">
-                <mat-option *ngFor="let item of listStates()" [value]="item">
+            <mat-select (selectionChange)="onStateSelected()" [(value)]="state">
+                <mat-option *ngFor="let item of statesList()" [value]="item">
                     {{item.state}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <span class="mat-typography"  style="margin-left: 20px;" [hidden]="state === null"><strong>Total cases in {{getState()}}:</strong> {{currentCasesForState()}}</span>
+        <span class="mat-typography"  style="margin-left: 20px;" [hidden]="state === null"><strong>Total cases in {{getState()}}:</strong> {{casesForState()}}</span>
+        <span class="mat-typography"  style="margin-left: 20px;" [hidden]="state === null"><strong>Total deaths in {{getState()}}:</strong> {{deathsForState()}}</span>
     </div>
+
+    <app-barchart *ngIf="chartData.length > 0" [data]="chartData"></app-barchart>
 </div>

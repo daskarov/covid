@@ -52,8 +52,7 @@ export class CovidService {
     }
 
     getStateData(state: State): DataFrame {
-        const stateData: DataFrame = this.df.where(row => ((row.get('state') === state.state) && (row.get('cases') >= 10)));
-        return stateData;
+        return this.df.where(row => ((row.get('state') === state.state) && (row.get('cases') >= 10)));
     }
 
     public getLatestDate(): string {
@@ -74,11 +73,20 @@ export class CovidService {
         return this.getLatestList().stat.sum('cases');
     }
 
-    public getCountForState(stateName: State): number {
-        if (this.df === null || stateName.state.length === 0) {
+    public getCountForState(state: State, field: string): number {
+        if (this.df === null || state.state.length === 0) {
             return -1;
         }
-        const latestStateData = this.latestDateList.where(row => row.get('state') === stateName.state);
-        return Number(latestStateData.getRow(0).get('cases'));
+        const latestStateData = this.latestDateList.where(row => row.get('state') === state.state);
+        return Number(latestStateData.getRow(0).get(field));
+    }
+
+    public getColumns(df: DataFrame, fields: Array<string>): Array<Array<string>> {
+        let elementList: Array<Array<string>> = new Array<Array<string>>();
+        fields.forEach(field => {
+            let items = df.select(field).toArray().map(x => x[0]);
+            elementList.push(items);
+        });
+        return elementList;
     }
 }
