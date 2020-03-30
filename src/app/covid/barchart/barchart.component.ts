@@ -51,7 +51,8 @@ export class BarchartComponent implements OnInit, OnChanges {
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
         let xDomain = this.data.map(d => d.date);
-        let yDomain = [0, d3.max(this.data, d => d.cases)];
+        let yMax = this.getMaxY();
+        let yDomain = [0, yMax];
 
         // create scales
         this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
@@ -64,6 +65,7 @@ export class BarchartComponent implements OnInit, OnChanges {
         this.xAxis = svg.append('g').attr('class', 'axis axis-x')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top + this.height})`)
             .call(d3.axisBottom(this.xScale));
+
         this.yAxis = svg.append('g').attr('class', 'axis axis-y')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
             .call(d3.axisLeft(this.yScale));
@@ -72,7 +74,7 @@ export class BarchartComponent implements OnInit, OnChanges {
     updateChart() {
         // update scales & axis
         this.xScale.domain(this.data.map(d => d.date));
-        this.yScale.domain([0, d3.max(this.data, d => d.cases)]);
+        this.yScale.domain([0, this.getMaxY()]);
         this.colors.domain([0, this.data.length]);
         this.xAxis.transition().call(d3.axisBottom(this.xScale));
         this.yAxis.transition().call(d3.axisLeft(this.yScale));
@@ -103,5 +105,10 @@ export class BarchartComponent implements OnInit, OnChanges {
             .delay((d, i) => i * 10)
             .attr('y', d => this.yScale(d.cases))
             .attr('height', d => this.height - this.yScale(d.cases));
+    }
+
+    private getMaxY(): number {
+        let max = d3.max(this.data, d => d.cases);
+        return (Math.floor(max / 20) + 1) * 20;
     }
 }
