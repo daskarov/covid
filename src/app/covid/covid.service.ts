@@ -21,9 +21,18 @@ export class CovidService {
     private statesList: Array<State> = null;
     private latestDate: string = null;
     private totalCases: number = 0;
+    private totalDeaths: number = 0;
 
     constructor() {
         this.loadCoronaData();
+    }
+
+    public getTotalCases(): number {
+        return this.totalCases;
+    }
+
+    public getTotalDeaths(): number {
+        return this.totalDeaths;
     }
 
     private loadCoronaData() {
@@ -35,7 +44,11 @@ export class CovidService {
 
     private readData() {
         this.readStates();
-        this.countTotal();
+        this.countTotals();
+        this.findLatestDate();
+    }
+
+    private findLatestDate() {
         this.latestDate = this.df.select('date').toArray().reduce((a, b) => {
             return a > b ? a : b;
         });
@@ -46,9 +59,10 @@ export class CovidService {
         this.statesList.sort((a, b) => (b.state < a.state ? 1 : -1));
     }
 
-    private countTotal() {
+    private countTotals() {
         this.statesList.forEach(state => {
             this.totalCases += this.getCountForState(state, 'cases');
+            this.totalDeaths += this.getCountForState(state, 'deaths');
         });
     }
 
@@ -65,10 +79,6 @@ export class CovidService {
             return '';
         }
         return this.latestDate[0];
-    }
-
-    getTotalCases(): number {
-        return this.totalCases;
     }
 
     public getCountForState(state: State, field: string): number {

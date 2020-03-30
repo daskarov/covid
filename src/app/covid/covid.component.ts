@@ -71,4 +71,8 @@ export class CovidComponent implements OnInit {
     public getState(): string {
         return this.state != null ? this.state.state : '';
     }
+
+    public totalDeaths(): number {
+        return this.covidService.getTotalDeaths();
+    }
 }
