@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = 'ng-sample';
+    title = 'US Covid-19';
 
     constructor(public router: Router) {
         router.navigate(['covid']).then();
