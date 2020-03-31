@@ -14,7 +14,7 @@ export class BarchartComponent implements OnInit, OnChanges {
 
     @Input() private data: Array<StateData>;
 
-    private margin: any = {top: 40, bottom: 40, left: 50, right: 50};
+    private margin: any = {top: 40, bottom: 100, left: 75, right: 75};
     private chart: any;
     private width: number;
     private height: number;
@@ -28,19 +28,16 @@ export class BarchartComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.createChart();
-        if (this.data) {
-            this.updateChart();
-        }
     }
 
     ngOnChanges() {
-        if (this.chart) {
-            this.updateChart();
+        if (!this.chart && this.data.length > 0) {
+            this.createChart();
         }
+        this.updateChart();
     }
 
-    createChart() {
+    private createChart() : void {
         let element = this.chartContainer.nativeElement;
         this.width = element.offsetWidth - this.margin.left - this.margin.right;
         this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
@@ -71,12 +68,18 @@ export class BarchartComponent implements OnInit, OnChanges {
             .call(d3.axisLeft(this.yScale));
     }
 
-    updateChart() {
+    private updateChart() {
         // update scales & axis
         this.xScale.domain(this.data.map(d => d.date));
         this.yScale.domain([0, this.getMaxY()]);
         this.colors.domain([0, this.data.length]);
-        this.xAxis.transition().call(d3.axisBottom(this.xScale));
+
+        this.xAxis.transition().call(d3.axisBottom(this.xScale))
+            .selectAll('text')
+            .style('text-anchor', 'end')
+            .attr('dx', '-.8em')
+            .attr('dy', '.15em')
+            .attr('transform', 'rotate(-90)');
         this.yAxis.transition().call(d3.axisLeft(this.yScale));
 
         let update = this.chart.selectAll('.bar').data(this.data);
@@ -105,6 +108,7 @@ export class BarchartComponent implements OnInit, OnChanges {
             .delay((d, i) => i * 10)
             .attr('y', d => this.yScale(d.cases))
             .attr('height', d => this.height - this.yScale(d.cases));
+
     }
 
     private getMaxY(): number {

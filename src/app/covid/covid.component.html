@@ -16,9 +16,9 @@
             </mat-select>
         </mat-form-field>
         <span class="mat-typography" style="margin-left: 20px;"
-              [hidden]="state === null"><strong>Total cases in {{getState()}}:</strong> {{casesForState()}}</span>
+              [hidden]="state === null">Total cases in {{getState()}}: <strong>{{casesForState()}}</strong></span>
         <span class="mat-typography" style="margin-left: 20px;"
-              [hidden]="state === null"><strong>Total deaths in {{getState()}}:</strong> {{deathsForState()}}</span>
+              [hidden]="state === null">Total deaths in {{getState()}}: <strong>{{deathsForState()}}</strong></span>
     </div>
 
     <app-barchart class="covid-chart" *ngIf="chartData.length > 0" [data]="chartData"></app-barchart>
