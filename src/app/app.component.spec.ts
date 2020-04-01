@@ -25,6 +25,6 @@ describe('AppComponent', () => {
     it(`should have as title 'ng-sample'`, () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('ng-sample');
+        expect(app.title).toEqual('US Covid-19');
     });
 });

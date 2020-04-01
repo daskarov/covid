@@ -47,16 +47,12 @@ export class BarchartComponent implements OnInit, OnChanges {
         this.chart = svg.append('g').attr('class', 'bars')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
-        let xDomain = this.data.map(d => d.date);
-        let yMax = this.getMaxY();
-        let yDomain = [0, yMax];
-
         // create scales
-        this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
-        this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
+        this.xScale = d3.scaleBand().padding(0.1);
+        this.yScale = d3.scaleLinear();
 
         // bar colors
-        this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]> ['blue', 'red']);
+        this.colors = d3.scaleLinear().range(<any[]> ['blue', 'red']);
 
         // x & y axis
         this.xAxis = svg.append('g').attr('class', 'axis axis-x')
@@ -70,8 +66,8 @@ export class BarchartComponent implements OnInit, OnChanges {
 
     private updateChart() {
         // update scales & axis
-        this.xScale.domain(this.data.map(d => d.date));
-        this.yScale.domain([0, this.getMaxY()]);
+        this.xScale.domain(this.data.map(d => d.date)).rangeRound([0, this.width]);
+        this.yScale.domain([0, this.getMaxY()]).range([this.height, 0]);
         this.colors.domain([0, this.data.length]);
 
         this.xAxis.transition().call(d3.axisBottom(this.xScale))

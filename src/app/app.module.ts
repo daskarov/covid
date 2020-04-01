@@ -16,12 +16,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { CovidComponent } from './covid/covid.component';
 import { BarchartComponent } from './covid/barchart/barchart.component';
+import { ScatterchartComponent } from './covid/scatterchart/scatterchart.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CovidComponent,
         BarchartComponent,
+        ScatterchartComponent,
     ],
     imports: [
         BrowserModule,
