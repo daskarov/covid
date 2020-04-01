@@ -1,6 +1,6 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
-import { StateData } from '../covid.service';
+import { ChartComponent } from '../chart.component';
 
 @Component({
     selector: 'app-barchart',
@@ -8,40 +8,13 @@ import { StateData } from '../covid.service';
     styleUrls: ['./barchart.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class BarchartComponent implements OnInit, OnChanges {
+export class BarChartComponent extends ChartComponent {
 
-    @ViewChild('chart', {static: true}) chartContainer: ElementRef;
-
-    @Input() private data: Array<StateData>;
-
-    private margin: any = {top: 40, bottom: 100, left: 75, right: 75};
-    private chart: any;
-    private width: number;
-    private height: number;
-    private xScale: any;
-    private yScale: any;
-    private colors: any;
-    private xAxis: any;
-    private yAxis: any;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-    ngOnChanges() {
-        if (!this.chart && this.data.length > 0) {
-            this.createChart();
-        }
-        this.updateChart();
-    }
-
-    private createChart() : void {
-        let element = this.chartContainer.nativeElement;
-        this.width = element.offsetWidth - this.margin.left - this.margin.right;
-        this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
-        let svg = d3.select(element).append('svg').attr('width', element.offsetWidth).attr('height', element.offsetHeight);
+    protected createChart(): void {
+        this.readElementParams();
+        let svg = d3.select(this.element).append('svg')
+            .attr('width', this.element.offsetWidth)
+            .attr('height', this.element.offsetHeight);
 
         // chart plot area
         this.chart = svg.append('g').attr('class', 'bars')
@@ -64,10 +37,10 @@ export class BarchartComponent implements OnInit, OnChanges {
             .call(d3.axisLeft(this.yScale));
     }
 
-    private updateChart() {
+    protected updateChart(): void {
         // update scales & axis
         this.xScale.domain(this.data.map(d => d.date)).rangeRound([0, this.width]);
-        this.yScale.domain([0, this.getMaxY()]).range([this.height, 0]);
+        this.yScale.domain(d3.extent(this.data.map(d => d.cases))).range([this.height, 0]);
         this.colors.domain([0, this.data.length]);
 
         this.xAxis.transition().call(d3.axisBottom(this.xScale))
@@ -96,7 +69,7 @@ export class BarchartComponent implements OnInit, OnChanges {
             .append('rect')
             .attr('class', 'bar')
             .attr('x', d => this.xScale(d.date))
-            .attr('y', d => this.yScale(0))
+            .attr('y', this.yScale(0))
             .attr('width', this.xScale.bandwidth())
             .attr('height', 0)
             .style('fill', (d, i) => this.colors(i))
@@ -105,10 +78,5 @@ export class BarchartComponent implements OnInit, OnChanges {
             .attr('y', d => this.yScale(d.cases))
             .attr('height', d => this.height - this.yScale(d.cases));
 
-    }
-
-    private getMaxY(): number {
-        let max = d3.max(this.data, d => d.cases);
-        return (Math.floor(max / 20) + 1) * 20;
     }
 }

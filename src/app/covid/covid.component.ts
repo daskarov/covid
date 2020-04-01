@@ -7,7 +7,7 @@ import { CovidService, State, StateData } from './covid.service';
     templateUrl: './covid.component.html',
     styleUrls: ['./covid.component.scss']
 })
-export class CovidComponent implements OnInit {
+export class CovidComponent {
 
     public static readonly DATE: string = 'date';
     public static readonly STATE: string = 'state';
@@ -18,12 +18,7 @@ export class CovidComponent implements OnInit {
     public state: State = null;
     public chartData: Array<StateData> = new Array<StateData>();
 
-    @ViewChild('chart') private chartContainer: ElementRef;
-
     constructor(private covidService: CovidService) {
-    }
-
-    ngOnInit() {
     }
 
     public statesList(): Array<State> {

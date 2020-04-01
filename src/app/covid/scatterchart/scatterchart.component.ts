@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ChartComponent } from '../chart.component';
 
 @Component({
-  selector: 'app-scatterchart',
-  templateUrl: './scatterchart.component.html',
-  styleUrls: ['./scatterchart.component.scss']
+    selector: 'app-scatterchart',
+    templateUrl: './scatterchart.component.html',
+    styleUrls: ['./scatterchart.component.scss']
 })
-export class ScatterchartComponent implements OnInit {
+export class ScatterChartComponent extends ChartComponent {
 
-  constructor() { }
+    protected createChart(): void {
+    }
 
-  ngOnInit(): void {
-  }
-
+    protected updateChart(): void {
+    }
 }

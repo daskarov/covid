@@ -71,7 +71,7 @@ export class CovidService {
     }
 
     getStateData(state: State): DataFrame {
-        return this.df.where(row => ((row.get('state') === state.state) && (row.get('cases') >= 10)));
+        return this.df.where(row => ((row.get('state') === state.state) && (row.get('cases') >= 100)));
     }
 
     public getLatestDate(): string {
