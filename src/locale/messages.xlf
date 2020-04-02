@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en-US" datatype="plaintext" original="ng2.template">
+        <body>
+            <trans-unit id="d9d98d568d8ecba60b378d59bfd26eb30b17a1b9" datatype="html">
+                <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>US Covid-19 Status
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                    (based on New York Times Github dataset)
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">3</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2c0a4f92387ebb44f11fbb15142f60d9a4b7c597" datatype="html">
+                <source>Latest update:
+                    <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+                    <x id="INTERPOLATION" equiv-text="{{lastUpdated()}}"/>
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="064b7bb31fefc1bd6645b8dc4d3b71c05437b0cd" datatype="html">
+                <source>Total cases in US:
+                    <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+                    <x id="INTERPOLATION" equiv-text="{{totalCases().toLocaleString()}}"/>
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="fd7d2774b6f6c32aca867b99c2511710fd3601bc" datatype="html">
+                <source>Total deaths in US:
+                    <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+                    <x id="INTERPOLATION" equiv-text="{{totalDeaths().toLocaleString()}}"/>
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">6</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="34d35376ec5f00f7d9330ad495005dc3e7876e77" datatype="html">
+                <source>Select State</source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">11</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="d9cd3ce85bc0262c0cc727764a39009c0dc5db5d" datatype="html">
+                <source>Total cases in<x id="INTERPOLATION" equiv-text="{{getState()}}"/>:
+                    <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+                    <x id="INTERPOLATION_1" equiv-text="{{casesForState()}}"/>
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">19</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="667a3bc1750f2cebf7d6a302876a2ebb3b394460" datatype="html">
+                <source>Total deaths in<x id="INTERPOLATION" equiv-text="{{getState()}}"/>:
+                    <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+                    <x id="INTERPOLATION_1" equiv-text="{{deathsForState()}}"/>
+                    <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+                </source>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/covid/covid.component.html</context>
+                    <context context-type="linenumber">21</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
