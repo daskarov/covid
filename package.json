@@ -2,6 +2,7 @@
   "name": "ng-sample",
   "version": "0.0.0",
   "scripts": {
+    "build-i18n": "for lang in es fr; do ng build --output-path=dist/covid/$lang --aot --prod --base-href /$lang/; done",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

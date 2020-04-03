@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { Router } from '@angular/router';
+
+export interface LandDesc {
+    code: string;
+    label: string;
+}
 
 @Component({
     selector: 'app-root',
@@ -9,7 +14,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
     title = 'US Covid-19';
 
-    constructor(public router: Router) {
+    languages: Array<LandDesc> = [
+        {code: 'en', label: 'English'},
+        {code: 'es', label: 'Español'},
+        {code: 'fr', label: 'Français'}
+    ];
+
+    constructor(public router: Router, @Inject(LOCALE_ID) public localeId: string) {
         router.navigate(['covid']).then();
     }
 }

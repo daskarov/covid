@@ -1,3 +1,10 @@
 <div class="fill-parent">
+    <div style="height: 40px; width: 100%; background: aqua; display: flex; align-items: center;">
+        <ng-template ngFor let-lang [ngForOf]="languages">
+            <span class="mat-typography" style="margin-left: 10px; margin-right: 10px;"
+                  *ngIf="lang.code !== localeId"><a href="covid/{{lang.code}}/">{{lang.label}}</a> </span>
+            <span *ngIf="lang.code === localeId">{{lang.label}} </span>
+        </ng-template>
+    </div>
     <router-outlet></router-outlet>
 </div>
